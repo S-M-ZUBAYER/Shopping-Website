@@ -1,0 +1,12 @@
+.summery {
+    text-align: center;
+}
+
+.cost-section {
+    margin: 20px;
+}
+
+.cart {
+    position: sticky;
+    top: 0;
+}
