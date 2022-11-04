@@ -17,3 +17,9 @@
 .navBar a:hover {
     color: aqua;
 }
+
+.btn-logout {
+    background-color: bisque;
+    margin-left: 15px;
+    border-radius: 5px;
+}

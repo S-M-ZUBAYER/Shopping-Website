@@ -9,6 +9,10 @@ import Order from './components/Order/Order';
 import Inventory from './components/Inventory/Inventory';
 import About from './components/About/About'
 import { productsAndCartLoaders } from './loaders/products&cartLoader';
+import LogIn from './components/LogIn/LogIn';
+import SignUp from './components/SignUp/SignUp';
+import Shipping from './components/Shipping/Shipping';
+import PrivateRoutes from './routes/PrivateRoutes';
 
 
 function App() {
@@ -19,7 +23,7 @@ function App() {
       children: [
         {
           path: "/",
-          loader: () => fetch('products.json'),
+          loader: productsAndCartLoaders,
           element: <Shop></Shop>
         },
         {
@@ -29,11 +33,23 @@ function App() {
         },
         {
           path: "inventory",
-          element: <Inventory></Inventory>
+          element: <PrivateRoutes><Inventory></Inventory></PrivateRoutes>
+        },
+        {
+          path: "shipping",
+          element: <PrivateRoutes><Shipping></Shipping></PrivateRoutes>
         },
         {
           path: "about",
           element: <About></About>
+        },
+        {
+          path: 'login',
+          element: <LogIn></LogIn>
+        },
+        {
+          path: 'signup',
+          element: <SignUp></SignUp>
         }
       ]
     }

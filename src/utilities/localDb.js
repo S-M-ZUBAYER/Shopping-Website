@@ -1,4 +1,13 @@
 let shoppingCart = {};
+const getItemFromDb = () => {
+
+    const storeData = localStorage.getItem('shoppingCart');
+    if (storeData) {
+        shoppingCart = JSON.parse(storeData)
+    }
+    return shoppingCart;
+}
+
 const addToDb = (id) => {
     const shoppingCart = getItemFromDb()
     const quantity = shoppingCart[id];
@@ -11,14 +20,11 @@ const addToDb = (id) => {
     }
     localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart))
 }
-const getItemFromDb = () => {
 
-    const storeData = localStorage.getItem('shoppingCart');
-    if (storeData) {
-        shoppingCart = JSON.parse(storeData)
-    }
-    return shoppingCart;
-}
+
+
+
+
 const removeItemFromDb = id => {
     const storedData = localStorage.getItem('shoppingCart');
     if (storedData) {
@@ -30,4 +36,11 @@ const removeItemFromDb = id => {
     }
 }
 
-export { addToDb, getItemFromDb, removeItemFromDb }
+
+const clearCartFromBDb = () => {
+    localStorage.removeItem('shoppingCart');
+}
+
+
+
+export { addToDb, getItemFromDb, removeItemFromDb, clearCartFromBDb }

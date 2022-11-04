@@ -15,3 +15,21 @@
 .cart-container {
     background-color: rgba(255, 153, 0, 0.3);
 }
+
+.pagination {
+    margin-left: 200px;
+    margin-bottom: 50px;
+
+}
+
+.pagination button {
+    margin-right: 10px;
+}
+
+.pagination .selected {
+    background-color: khaki;
+    border: khaki;
+    font-weight: bold;
+    padding: 8px;
+    width: 35px;
+}

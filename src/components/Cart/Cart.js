@@ -1,17 +1,20 @@
 import React from 'react';
 import './Cart.css'
 
-const Cart = ({ cart }) => {
+const Cart = ({ cart, clearCart, children }) => {
     let total = 0;
     let shoppingCost = 0;
     let quantity = 0;
-    for (let product of cart) {
+
+    for (const product of cart) {
         quantity = quantity + product.quantity;
         total = total + (product.price) * product.quantity;
         shoppingCost = shoppingCost + product.shipping;
     }
+
     const tax = parseFloat((total * 0.1).toFixed(2));
     const grandTotal = total + shoppingCost + tax;
+
     return (
         <div className='cart'>
             <div>
@@ -24,6 +27,11 @@ const Cart = ({ cart }) => {
                 <p>Tax: ${tax}</p>
                 <h4>Grand Total: ${grandTotal.toFixed(2)}</h4>
             </div>
+            <div>
+                <button onClick={clearCart} className='clear-cart'>Clear Cart</button>
+            </div>
+            {children}
+
 
         </div>
     );

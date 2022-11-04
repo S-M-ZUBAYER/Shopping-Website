@@ -1,28 +1,39 @@
 import React, { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
-import { removeItemFromDb } from '../../utilities/localDb';
+import { Link, useLoaderData } from 'react-router-dom';
+import { clearCartFromBDb, removeItemFromDb } from '../../utilities/localDb';
 import Cart from '../Cart/Cart';
 import OrderReview from '../OrderReview/OrderReview';
 
 const Order = () => {
-    const { products, previousCart } = useLoaderData(); //{ products, previousCart } will be return from useLoaderData()
+    const { previousCart } = useLoaderData(); //{ products, previousCart } will be return from useLoaderData()
     const [cart, setCart] = useState(previousCart);
-    const deleteHandler = (id) => {
-        const remainingProducts = cart.filter(remain => remain.id !== id);
-        setCart(remainingProducts);
-        removeItemFromDb(id);
+    console.log(previousCart)
+
+    const clearCart = () => {
+
+        setCart([]);
+        clearCartFromBDb();
     }
+    const deleteHandler = (id) => {
+        const remainingProducts = cart.filter(remain => remain._id !== id);
+        removeItemFromDb(id);
+        setCart(remainingProducts);
+    }
+
     return (
         <div className='shopping-container'>
             <div className="Orders-container">
                 {cart.map(product => <OrderReview
-                    key={product.id}
+                    key={product._id}
                     product={product}
                     handler={deleteHandler}
                 ></OrderReview>)}
+                {cart.length === 0 && <h1>No review products are available. Please <Link to="/">order more</Link></h1>}
             </div>
             <div className="cart-container">
-                <Cart cart={cart}></Cart>
+                <Cart cart={cart} clearCart={clearCart}>
+                    <Link to="/shipping"><button>Process Shipping</button></Link>
+                </Cart>
             </div>
         </div>
     );
